@@ -3,7 +3,7 @@ on:
   push:
    
 jobs:
-  Helm Deployment:
+  Helm-Deployment:
     name: deploy on minikube 
     runs-on: self-hosted
     steps:

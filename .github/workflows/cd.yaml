@@ -15,7 +15,7 @@ jobs:
       - name: Get Helm  version info
         run: helm version
       - name: install kanaban application
-        run: helm install -f ./kanban-app.yaml kanban-app ./app
+        run: helm upgrade --install -f ./kanban-app.yaml kanban-app ./app
       - name: Get Kubernetes pods
         run: kubectl get services --all-namespaces
       - name: install kanban-postgres 

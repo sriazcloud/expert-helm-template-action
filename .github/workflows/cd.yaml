@@ -19,15 +19,15 @@ jobs:
       - name: Get Kubernetes pods
         run: kubectl get services --all-namespaces
       - name: install kanban-postgres 
-        run: helm install -f ./kanban-postgres.yaml postgres ./postgres
+        run: helm upgrade --install -f ./kanban-postgres.yaml postgres ./postgres
       - name: install kanaban adminer 
-        run: helm install -f ./adminer.yaml adminer ./app
+        run: helm upgrade --install -f ./adminer.yaml adminer ./app
       - name: install kanaban app 
-        run: helm install -f ./kanban-app.yaml kanban-app ./app
+        run: helm upgrade --install -f ./kanban-app.yaml kanban-app ./app
       - name: install kanaban GUI
-        run: helm install -f ./kanban-ui.yaml kanban-ui ./app
+        run: helm upgrade --install -f ./kanban-ui.yaml kanban-ui ./app
       - name: install ingress controller to attach services
-        run: helm install -f ./ingress.yaml ingress ./ingress
+        run: helm upgrade --install -f ./ingress.yaml ingress ./ingress
       - name: helm list 
         run: helm list
       - name: get kubernetes deployments 

@@ -26,6 +26,8 @@ jobs:
         run: helm upgrade --install -f ./kanban-app.yaml kanban-app ./app
       - name: install kanaban GUI
         run: helm upgrade --install -f ./kanban-ui.yaml kanban-ui ./app
+      - name: creating ingress backend services to Enable ingress controller feature
+        run: helm dependency update ./ingress/
       - name: install ingress controller to attach services
         run: helm upgrade --install -f ./ingress.yaml ingress ./ingress
       - name: helm list 

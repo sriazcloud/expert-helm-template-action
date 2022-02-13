@@ -1,0 +1,32 @@
+name: HELM+minikube+CD
+on:
+  push:
+   
+jobs:
+  Helm Deployment:
+    name: deploy on minikube 
+    runs-on: self-hosted
+    steps:
+      - name: Get Minikube status
+        run: minikube status
+      - name: Get cluster info
+        run: kubectl cluster-info
+      - name: install kanaban application
+        run: helm install -f kanban-app.yaml kanban-app ./app
+      - name: Get Kubernetes pods
+        run: kubectl get services --all-namespaces
+      - name: install kanban-postgres 
+        run: helm install -f kanban-postgres.yaml postgres ./postgres
+      - name: install kanaban adminer 
+        run: helm install -f adminer.yaml adminer ./app
+      - name: install kanaban app 
+        run: helm install -f kanban-app.yaml kanban-app ./app
+      - name: install kanaban GUI
+        run: helm install -f kanban-ui.yaml kanban-ui ./app
+      - name: install ingress controller to attach services
+        run: helm install -f ingress.yaml ingress ./ingress
+      - name: helm list 
+        run: helm install -f ingress.yaml ingress ./ingress
+      - name: get kubernetes deployments 
+        run: kubectl get deployments
+   
